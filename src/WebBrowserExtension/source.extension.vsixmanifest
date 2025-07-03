@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="WebBrowserExtension.1C6F199A-F603-4269-B992-4E898ECA1644" Version="0.3.1" Language="en-US" Publisher="ymdwar" />
+        <Identity Id="WebBrowserExtension.1C6F199A-F603-4269-B992-4E898ECA1644" Version="0.3.5" Language="en-US" Publisher="ymdwar" />
         <DisplayName>Web Browser Extension for VS2022</DisplayName>
         <Description xml:space="preserve">Brings the embedded Web Browser back to Visual Studio 2022.</Description>
         <Icon>Resources\Icon.png</Icon>

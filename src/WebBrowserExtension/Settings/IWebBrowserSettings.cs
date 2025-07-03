@@ -9,6 +9,9 @@ namespace WebBrowserExtension.Settings
     {
         string HomePage { get; set; }
         LogEventLevel MinimumLogLevel { get; set; }
+
+        string ExecScript { get; set; }
+
         void Save();
         void Load();
     }

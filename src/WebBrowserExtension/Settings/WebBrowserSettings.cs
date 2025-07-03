@@ -58,6 +58,13 @@ namespace WebBrowserExtension.Settings
             set => Set(ref minimumLogLevel, value);
         }
 
+        private string execScript;
+        public string ExecScript
+        {
+            get => execScript;
+            set => Set(ref execScript, value);
+        }
+
         public void Load()
         {
             try
@@ -65,6 +72,7 @@ namespace WebBrowserExtension.Settings
                 // NB: the stored url can be intentionally empty, meaning the user wished to open the browser with a blank page
                 HomePage = settingsStore.GetString(settingsKey, nameof(HomePage), defaultHomePage) ?? "";
                 MinimumLogLevel = (LogEventLevel)settingsStore.GetInt32(settingsKey, nameof(MinimumLogLevel), (int)LogEventLevel.Information);
+                ExecScript = settingsStore.GetString(settingsKey, nameof(ExecScript), null) ?? "";
             }
             catch (Exception ex)
             {
@@ -81,6 +89,7 @@ namespace WebBrowserExtension.Settings
 
                 settingsStore.SetString(settingsKey, nameof(HomePage), HomePage ?? "");
                 settingsStore.SetInt32(settingsKey, nameof(MinimumLogLevel), (int)MinimumLogLevel);
+                settingsStore.SetString(settingsKey, nameof(ExecScript), ExecScript ?? "");
             }
             catch (Exception ex)
             {

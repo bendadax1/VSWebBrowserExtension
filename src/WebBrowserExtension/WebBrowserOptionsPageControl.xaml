@@ -5,19 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:conv="clr-namespace:WebBrowserExtension.Converters"
              xmlns:serilog="clr-namespace:Serilog.Events;assembly=Serilog"
-             mc:Ignorable="d" 
-             d:DesignHeight="159" d:DesignWidth="543">
+             mc:Ignorable="d" d:DesignWidth="543" Height="271">
     <UserControl.Resources>
         <conv:GetEnumValuesConverter x:Key="getEnumValues"/>
     </UserControl.Resources>
-    <StackPanel Orientation="Vertical" Margin="20">
-            <TextBlock Text="Home Page:" VerticalAlignment="Center" Margin="1" />
-            <TextBox Margin="1" VerticalAlignment="Center" Height="21"
+    <StackPanel Orientation="Vertical" Margin="20,20,20,17">
+        <TextBlock Text="Home Page:" VerticalAlignment="Center" Margin="1" />
+        <TextBox Margin="1" VerticalAlignment="Center" Height="21"
                  Text="{Binding HomePage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Grid Height="10" />
         <TextBlock Text="Minimum Log Level:" VerticalAlignment="Center" Margin="1" />
-            <ComboBox Margin="1" VerticalAlignment="Center" Height="21"
+        <ComboBox Margin="1" VerticalAlignment="Center" Height="21"
                   ItemsSource="{Binding Source={x:Type serilog:LogEventLevel}, Converter={StaticResource getEnumValues}}"
                   SelectedItem="{Binding MinimumLogLevel, Mode=TwoWay}" />
+        <Grid Height="10" />
+        <TextBlock Text="Script:" VerticalAlignment="Center" Margin="1" />
+        <TextBox Margin="1" 
+                 AcceptsReturn="True" 
+                 Height="180" 
+                 HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto"
+                 Text="{Binding ExecScript , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        />
     </StackPanel>
 </UserControl>

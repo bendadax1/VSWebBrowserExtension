@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.Wpf;
+using Serilog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.Web.WebView2.Core;
-using Microsoft.Web.WebView2.Wpf;
-using Serilog;
 using WebBrowserExtension.Settings;
 using WebBrowserExtension.Utils;
 using SD = System.Drawing;
@@ -115,6 +116,52 @@ namespace WebBrowserExtension
             Log.Verbose($"{e.NavigationId} - Navigation Completed. Status: {status}");
             isNavigating = false;
             RequeryCommands();
+
+            
+            if (e.IsSuccess )
+            {
+                // 注入 VS 风格滚动条样式
+                try
+                {
+                    string vsScrollbarCss = @"
+                        (function() {
+                            var style = document.createElement('style');
+                            style.innerHTML = `
+                                ::-webkit-scrollbar {
+                                    width: 12px;
+                                    background: #2d2d30;
+                                }
+                                ::-webkit-scrollbar-thumb {
+                                    background: #424242;
+                                    border-radius: 6px;
+                                    border: 2px solid #2d2d30;
+                                }
+                                ::-webkit-scrollbar-thumb:hover {
+                                    background: #007acc;
+                                }
+                            `;
+                            document.head.appendChild(style);
+                        })();";
+                    webView?.CoreWebView2?.ExecuteScriptAsync(vsScrollbarCss);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Failed to inject VS-like scrollbar CSS");
+                }
+
+                var settings = GetService<IWebBrowserSettings>();
+                if (!string.IsNullOrWhiteSpace(settings.ExecScript))
+                {
+                    try
+                    {
+                        webView?.CoreWebView2?.ExecuteScriptAsync(settings.ExecScript);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex, $"Failed executes custom script:{settings.ExecScript}");
+                    }
+                }
+            }
         }
 
         private void OnCoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
