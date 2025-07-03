@@ -39,14 +39,14 @@
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidWebBrowserExtensionPackage" value="{1ba34956-275f-48c6-889b-a8834db18c23}" />
+    <GuidSymbol name="guidWebBrowserExtensionPackage" value="{4AD9BE6C-CE54-459E-A0DA-B22892F4818E}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidWebBrowserExtensionPackageCmdSet" value="{48c3fadd-683b-4577-8583-c9817b4e5a50}">
+    <GuidSymbol name="guidWebBrowserExtensionPackageCmdSet" value="{6F0BE5A0-0F70-48DA-A303-4238A0240A69}">
       <IDSymbol name="WebBrowserWindowCommandId" value="0x0100" />
     </GuidSymbol>
 
-    <GuidSymbol name="guidImages" value="{4b371d22-ef5e-4ea3-9ce4-d4903129d549}" >
+    <GuidSymbol name="guidImages" value="{3CDA9B88-DF93-4184-BB09-97D9F71878CB}" >
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />

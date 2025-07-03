@@ -21,7 +21,7 @@ namespace WebBrowserExtension
     [ProvideProfile(typeof(WebBrowserOptionsPage), Constants.ExtensionName, "General", 0, 0, true)]
     public sealed class WebBrowserExtensionPackage : AsyncPackage
     {
-        public const string PackageGuidString = "1ba34956-275f-48c6-889b-a8834db18c23";
+        public const string PackageGuidString = "4AD9BE6C-CE54-459E-A0DA-B22892F4818E";
         
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place

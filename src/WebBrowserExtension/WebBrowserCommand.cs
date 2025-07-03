@@ -13,7 +13,7 @@ namespace WebBrowserExtension
         public const int WebBrowserWindowNavigateId = 0x101;
         public const int WebBrowserWindowToolbarID = 0x1000;
 
-        public static readonly Guid CommandSet = new Guid("48c3fadd-683b-4577-8583-c9817b4e5a50");
+        public static readonly Guid CommandSet = new Guid("6F0BE5A0-0F70-48DA-A303-4238A0240A69");
 
         private readonly ILogger log = Log.Logger;
         private readonly AsyncPackage package;

@@ -26,6 +26,9 @@ namespace WebBrowserExtension
         private bool isNavigating = false;
         private bool isFirstTimeLoad = true;
 
+        public static readonly RoutedUICommand ShowNavigationCommand = new RoutedUICommand(
+            "Show Navigation", "ShowNavigation", typeof(WebBrowserWindowControl));
+
         public WebBrowserWindowControl()
         {
             try
@@ -34,6 +37,8 @@ namespace WebBrowserExtension
                 InitializeAddressBar();
                 InitializeAsync();
                 AttachControlEventHandlers(webView);
+
+                CommandBindings.Add(new CommandBinding(ShowNavigationCommand, ShowNavigationExecuted, ShowNavigationCanExecute));
 
                 Loaded += WebBrowserWindowControl_Loaded;
                 Unloaded += WebBrowserWindowControl_Unloaded;
@@ -125,9 +130,11 @@ namespace WebBrowserExtension
             SetDefaultDownloadDialogPosition();
         }
 
-        private void OnWebViewDocumentTitleChanged(object sender, object e) =>
-            SetTitleAction?.Invoke(webView.CoreWebView2.DocumentTitle);
-
+        private void OnWebViewDocumentTitleChanged(object sender, object e)
+        {
+            //SetTitleAction?.Invoke(webView.CoreWebView2.DocumentTitle);
+        }
+            
         private void OnWebViewHandleIFrames(object sender, CoreWebView2FrameCreatedEventArgs args)
         {
             webViewFrames.Add(args.Frame);
@@ -215,5 +222,24 @@ namespace WebBrowserExtension
         }
 
         private T GetService<T>() where T : class => Services.GetService<T>();
+        private bool _navigationVisible = true;
+        private void ShowNavigationExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            //显示隐藏除ShowNavigation按钮之外的所有导航按钮及地址栏
+            _navigationVisible = !_navigationVisible;
+            var visibility = _navigationVisible ? Visibility.Visible : Visibility.Collapsed;
+
+            backButton.Visibility = visibility;
+            forwardButton.Visibility = visibility;
+            reloadButton.Visibility = visibility;
+            homeButton.Visibility = visibility;
+            goButton.Visibility = visibility;
+            addressBar.Visibility = visibility;
+        }
+
+        private void ShowNavigationCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
     }
 }
